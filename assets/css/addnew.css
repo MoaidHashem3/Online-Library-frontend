@@ -10,21 +10,13 @@ body {
     min-height: 100vh;
 }
 
-/* Sidebar */
-.sidebar {
-    width: 15%;
-    background-color: #008A90;
-    height: 100vh;
-    position: fixed;
-}
-
 /* Main Container */
 .main-container {
-    width: 85%;
-    margin-left: 15%;
+    width: 100%;
+    margin: 0;
     padding: 40px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 /* Form Section */
