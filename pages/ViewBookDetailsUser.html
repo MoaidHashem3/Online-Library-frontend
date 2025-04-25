@@ -1,19 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>ViewBooksAdmin</title>
-    <link rel="stylesheet" href="../assets/css/ViewBooks_Admin.css">
-    <link rel="stylesheet" href="../assets/css/LeftNavBorder.css">
-     <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+    <title>
+        View book details for User. 
+    </title>
+
+    <link rel="stylesheet" href="../assets/css/ViewBookDetails.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/navbar.css">
     <link rel="stylesheet" href="../assets/css/footer.css">
+    <link rel="stylesheet" href="../assets/css/LeftNavBorder.css">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css/pagiationNumbers.css">
+
 </head>
-<body>
+
+
+
+<body class="body-elements">
+
     <nav class="navbar">
         <div class="left-section">
             <a href="../index.html" class="navbar-brand">LMS</a>
@@ -32,9 +40,10 @@
             <a href="login.html" class="nav-button">Login</a>
         </div>
     </nav>
-    <section class="AdminViewBook_Container">
-        
-        <div class="left-NavBorder">
+   
+    
+    <main class="main-content">
+       <div class="left-NavBorder">
             <div class="left-NavBorder_NavigationIcons">
                 <div class="NavigationButtonsColumn">
                     <div class="NavigationButton">
@@ -59,21 +68,44 @@
             </div>
         </div>
         
-        <div class="AdminViewBook">
-            <div class="AdminViewBook_Title">
-                <h1>List of Books</h1>
-                <p>Find the right books for you</p>
+        <div class="content-wrapper">
+            <div class="details-section">
+                <div class="body-content">
+                    <img src="../assets/img/icons/BookID.png" alt="Book ID" class="body-images">
+                    <p class="body-text" id="BookId">Book ID</p>
+                </div>
+
+                <div class="body-content">
+                    <img src="../assets/img/icons/Author.png" alt="Author" class="body-images">
+                    <p class="body-text" id="BookAuthor">Author</p>
+                </div>
+
+                <div class="body-content">
+                    <img src="../assets/img/icons/Category.png" alt="Category" class="body-images">
+                    <p class="body-text" id="BookCategory">Category</p>
+                </div>
+
+                <div class="buttonDirection">
+                    <button class="button" id="BorrowButton" style="background-color: #00CF76;">
+                        <img src="../assets/img/icons/AddNewBook.png" alt="Edit" class="button-icon">
+                        Borrow
+                    </button>
+                </div>
             </div>
-            
-            <div class="CardsContainer">
-                <!-- Books will be dynamically inserted here by JavaScript -->
-                <div class="ButtonRow">
-                    <div class="pagination-numbers"></div>
+
+            <div class="image-section">
+                <div class="right-details">
+                    <div class="right-image">
+                        <img src="../assets/img/testImage.jpeg" alt="Book" style="border-radius: 10%;"> 
+                    </div>
+                    <p class="text" id="BookTitle">Book Name</p>
+                    <p class="book-description" id="BookDescription">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+
                 </div>
             </div>
         </div>
-        
-    </section>
+    </main>
+    
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-brand">LMS</div>
@@ -96,8 +128,10 @@
             © 2025 LMS. All rights reserved.
         </div>
     </footer>
-    <script src="../assets/js/search.js"></script>
-    <script src="../assets/js/bookManager.js"></script>
-    <script src="../assets/js/main.js"></script>
+
+
+    <script src="../assets/js/Utilities/FillBookDetails.js"></script>
+    <script src="../assets/js/BookDetailsUser.js"></script>
 </body>
+
 </html>
