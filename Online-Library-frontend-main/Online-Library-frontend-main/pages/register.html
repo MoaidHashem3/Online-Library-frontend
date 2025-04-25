@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Your Account</title>
+    <link rel="stylesheet" href="../assets/css/register.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/register.css"/> 
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="left-section">
+          <a href="../index.html" class="navbar-brand">LMS</a>
+          <div class="search-container">
+              <i class="fas fa-search search-icon"></i>
+              <input type="search" id="search" class="search-bar" placeholder="Search books...">
+              <select class="search-category">
+                  <option value="title">Title</option>
+                  <option value="author">Author</option>
+                  <option value="category">Category</option>
+              </select>
+          </div>
+      </div>
+      <div class="nav-buttons">
+          <a href="register.html" class="nav-button">Register</a>
+          <a href="login.html" class="nav-button">Login</a>
+      </div>
+  </nav>
+  <div class="main-content">
+    <div class="registration-container">
+      <h1>Create Your Account</h1>
+
+      <form id ="registerForm" >
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            required
+            placeholder="Enter username"
+            autofocus
+           
+          />
+          <span class="input-hint"
+          
+            >4-20 characters,letters and numbers only</span
+          
+          >  
+           <span class="error-message" id="usernameError"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" required placeholder="Enter email" />
+          <span class="error-message" id="emailError"></span>
+        </div>
+
+        <div class="form-group" >
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            required
+            placeholder="Enter password"
+          />
+          <span class="input-hint">Minimum 8 characters</span>
+          <span class="error-message" id="passwordError"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="confirm-password">Confirm Password</label>
+          <input
+            type="password"
+            id="confirm-password"
+            required
+            placeholder="Confirm password"
+          />
+          <span class="error-message" id="confirmPasswordError"></span>
+        </div>
+
+        <div class="checkbox-group">
+          <input type="checkbox" id="is_admin" name="is_admin" />
+          <label for="is_admin">Register as an admin</label>
+        </div>
+
+        <button type="submit">Register</button>
+        <div id="successMessage" class="success-message"></div>
+        <div class="login-link">
+            Already have an account? <a href="login.html" >Sign in</a>
+        </div>
+      </form>
+    </div>
+      <script src="../assets/js/register.js"></script>
+    <footer class="footer">
+      <div class="footer-content">
+          <div class="footer-brand">LMS</div>
+          <div class="footer-links">
+              <h3>Quick Links</h3>
+              <a href="">About Us</a>
+              <a href="">Contact</a>
+              <a href="">FAQ</a>
+              <a href="">Privacy Policy</a>
+          </div>
+          <div class="footer-social">
+              <a href="#"><i class="fab fa-facebook"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-linkedin"></i></a>
+          </div>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="footer-bottom">
+          © 2025 LMS. All rights reserved.
+      </div>
+  </footer>
+  </div>
+  </body>
+</html>

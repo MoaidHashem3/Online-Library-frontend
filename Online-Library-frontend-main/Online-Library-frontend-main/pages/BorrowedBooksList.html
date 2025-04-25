@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Borrowed Books</title>
+    <link rel="stylesheet" href="../assets/css/BorrowedBooksList.css">
+    <link rel="stylesheet" href="../assets/css/LeftNavBorder.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/pagiationNumbers.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="left-section">
+            <a href="../index.html" class="navbar-brand">LMS</a>
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="search" id="search" class="search-bar" placeholder="Search books...">
+                <select class="search-category">
+                    <option value="title">Title</option>
+                    <option value="author">Author</option>
+                    <option value="category">Category</option>
+                </select>
+            </div>
+        </div>
+        <div class="nav-buttons">
+            <a href="register.html" class="nav-button">Register</a>
+            <a href="login.html" class="nav-button">Login</a>
+        </div>
+    </nav>
+    <section class="BorrowedBooks_Container">
+        <div class="left-NavBorder">
+            <div class="left-NavBorder_NavigationIcons">
+                <div class="NavigationButtonsColumn">
+                    <div class="NavigationButton">
+                        <a href="ViewBooks.html">
+                            <button class="ViewBooksButton"></button>
+                        </a>
+                    </div>
+                    <p class="NavigationButtonText">View Books</p>
+                    <div class="NavigationButton">
+                        <a href="BorrowedBooksList.html">
+                            <button class="BorrowedBooksButton"></button>
+                        </a>
+                    </div>
+                    <p class="NavigationButtonText">Borrowed Books</p>
+                    <div class="NavigationButton">
+                        <a href="AddNewBook.html">
+                        <button class="AddBookButton"></button>
+                        </a>
+                    </div>
+                    <p class="NavigationButtonText">Add New Book</p>
+                </div>
+            </div>
+        </div>
+        <div class="BorrowedBooksCardsContainer">
+            <h1 class="BB_Cards_Title">Borrowed Books</h1>
+            <div class="BB_Card_List">
+                <!-- Borrowed Cards Goes Here-->
+                <!-- Example on a Card 
+                <div class="BB_Card">
+                    <div class="BB_CardDetails">
+                        <div id = "Title" class="BB_BookTitle">Book Title</div>
+                        <div id = "Author" >Author: Random Name</div>
+                        <div id = "Category" >Category: Random Category</div>
+                        <div id = "BookId" >BookId : 1234</div>
+                    </div>
+                    <img class="BB_Card_BookImage" src="../assets/img/testImage.jpeg" alt="">
+                </div>
+                -->
+                
+            </div>
+            <div class="ButtonRow">
+                <div class="pagination-numbers"></div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">LMS</div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <a href="">About Us</a>
+                <a href="">Contact</a>
+                <a href="">FAQ</a>
+                <a href="">Privacy Policy</a>
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+        <div class="footer-divider"></div>
+        <div class="footer-bottom">
+            © 2025 LMS. All rights reserved.
+        </div>
+    </footer>
+<script src="../assets/js/BorrowedBooksList.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

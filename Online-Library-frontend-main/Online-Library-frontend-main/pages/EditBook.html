@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EditBook</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/EditBook.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/LeftNavBorder.css">
+    <link rel="stylesheet" href="../assets/css/PopUpWindow_MakeSure.css">
+    
+    <script type="module" src="../assets/js/Utilities/Validator.js"></script>
+    <script type="module" src="../assets/js/Utilities/Parser.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="left-section">
+            <a href="../index.html" class="navbar-brand">LMS</a>
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="search" id="search" class="search-bar" placeholder="Search books...">
+                <select class="search-category">
+                    <option value="title">Title</option>
+                    <option value="author">Author</option>
+                    <option value="category">Category</option>
+                </select>
+            </div>
+        </div>
+        <div class="nav-buttons">
+            <a href="register.html" class="nav-button">Register</a>
+            <a href="login.html" class="nav-button">Login</a>
+        </div>
+    </nav>
+    <div id="resultMessage" >
+        <span id="resultMessageText">message Box</span>
+    </div>
+    <section class="container">
+        <div class="left-NavBorder">
+            <div class="left-NavBorder_NavigationIcons">
+                <div class="NavigationButtonsColumn">
+                    <div class="NavigationButton">
+                        <a href="ViewBooks.html">
+                            <button class="ViewBooksButton"></button>
+                        </a>
+                    </div>
+                    <p class="NavigationButtonText">View Books</p>
+                    <div class="NavigationButton">
+                        <a href="BorrowedBooksList.html">
+                            <button class="BorrowedBooksButton"></button>
+                        </a>
+                    </div>
+                    <p class="NavigationButtonText">Borrowed Books</p>
+                    <div class="NavigationButton">
+                        <a href="AddNewBook.html">
+                        <button class="AddBookButton"></button>
+                        </a>
+                    </div>
+                    <p class="NavigationButtonText">Add New Book</p>
+                </div>
+            </div>
+        </div>
+
+        <form class="EditBookForm">
+            <h1 class="EditBookForm_Title">Edit Book</h1>
+                
+            <!--<div id="PopUpWindowId" class="PopUpWindow">
+                <div class="PopUpWindowId-Content">
+                    <p>Sure you want to make the changes ?</p>
+                    <button id="YesButtonId" class="YesSaveButton">Yes</button>
+                    <button id="NoButtonId" class="NoSaveButton">No</button>
+                </div>
+            </div>-->
+            
+            <div class="Edit_Container">
+                <div class="column">
+
+                    <div class="row">
+                        <label for="Book_TitleInput" class="EditBookForm_InputLabel">
+                            <br>  Book Title  <br>
+                            <input type="text" class="EditBookForm_BookIdInput"
+                                   id="Book_TitleInput" placeholder="Book Name">
+                        </label>
+                    </div>
+
+                    <div class="row">
+                        <label for="Book_AuthorInput" class="EditBookForm_InputLabel">
+                            <br> Author <br>
+                            <input type="text" class="EditBookForm_BookIdInput"
+                                   id="Book_AuthorInput" placeholder="Author">
+                        </label>
+
+                        <label for="Book_CategoryInput" class="EditBookForm_InputLabel">
+                            <br>  Category  <br>
+                            <input type="text" class="EditBookForm_BookIdInput"
+                                   id="Book_CategoryInput" placeholder="Category">
+                        </label>
+                    </div>
+
+                    <div class="row">
+                        <label for="Book_DescriptionInput" class="EditBookForm_InputLabel">
+                            <br> Description <br>
+                            <input type="text" class="EditBookForm_BookIdInput"
+                                   id="Book_DescriptionInput" placeholder="Description">
+                        </label>
+
+                        <label for="Book_IdInput" class="EditBookForm_InputLabel">
+                            <br>  Book ID  <br>
+                            <input type="text" class="EditBookForm_BookIdInput"
+                                   id="Book_IdInput" placeholder="BookId">
+                        </label>
+                    </div>
+                    
+                    <div class="row">
+                        <button id="EditBookForm_SaveButtonId" 
+                                class="EditBookForm_SaveButton">Save Changes</button>
+                        <button class="EditBookForm_CancelButton">Cancel Changes</button>
+                    </div>
+
+                </div>
+
+                <div class="column">
+                    <div class="row">
+                        <img src="../assets/img/testImage.jpeg" id="EditBookForm_bookImage">
+                    </div>
+
+                    <div class="row image-upload-container">
+                        <label class="upload-label">Change Book Image:</label>
+                        <label class="EditBookForm_ChangeImageButton">
+                            + Select Image
+                            <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </section>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">LMS</div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <a href="">About Us</a>
+                <a href="">Contact</a>
+                <a href="">FAQ</a>
+                <a href="">Privacy Policy</a>
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+        <div class="footer-divider"></div>
+        <div class="footer-bottom">
+            © 2025 LMS. All rights reserved.
+        </div>
+    </footer>
+<script type="module" src="../assets/js/EditBook.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

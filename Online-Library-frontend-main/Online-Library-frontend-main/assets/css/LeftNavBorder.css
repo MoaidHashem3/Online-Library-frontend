@@ -1,0 +1,61 @@
+body {
+    font-family: 'Lato', sans-serif;
+   
+}
+
+.left-NavBorder{
+    background-color: #008A90;
+    border-radius: 15px;
+    width: 10rem;
+    color:white;
+    font-size: 25px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.NavigationButtonsColumn{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    gap: 1rem;
+}
+
+.NavigationButtonsColumn a {
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+}
+
+.AddBookButton, .BorrowedBooksButton, .ViewBooksButton {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 75px;
+    height: 75px;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.3s ease-in-out;
+    background-color: transparent;
+    
+}
+
+.AddBookButton:hover, .BorrowedBooksButton:hover, .ViewBooksButton:hover {
+    transform: scale(1.05);
+}
+
+.AddBookButton {
+    background-image: url('../img/icons/AddNewBook.png');
+    
+}
+
+.BorrowedBooksButton {
+    background-image: url('../img/icons/BorrowedBooks.png');
+}
+
+.ViewBooksButton {
+    background-image: url('../img/icons/ViewBooks.png');
+}
+
+
