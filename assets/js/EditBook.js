@@ -1,7 +1,6 @@
 import {TryParseData} from "./Utilities/Parser.js"
 
 
-
 let oldBookData = {};
 let oldImage;
 
@@ -78,7 +77,12 @@ ChooseImageInput.onchange = () => {
 }
 
 function LoadOldBookData(){
-     const params = new URLSearchParams(window.location.search);
+    /* const params = new URLSearchParams(window.location.search);*/
+    const params = new URLSearchParams(window.location.search);
+    const bookId = params.get("id"); // should make a api call that fetches book old data
+    
+    // const params = await GetOldBookData(id);
+    
      oldImage = BookImage.src;
      
      const oldValues = {
@@ -138,4 +142,15 @@ async function MakeUpdateBookCall(Book){
     return undefined;
 }
 
+async function GetOldBookData(id){
+    let request = new Request(`url/${id}`,{
+        method : 'Get',
+        headers:{
+            'Content-Type': 'application/json'
+        }
+    });
+    
+    let response = await fetch(request);
 
+    return await response.json();
+}
