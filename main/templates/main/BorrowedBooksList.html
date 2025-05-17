@@ -14,10 +14,6 @@
     <link rel="stylesheet" href="{% static 'css/footer.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="{% static 'css/pagiationNumbers.css' %}">
-    
-    <script>
-        const BORROWED_BOOKS_DATA = JSON.parse('{{ borrowed_books|escapejs }}');
-    </script>
 </head>
 <body>
     {% include 'Includes/navbar.html' %}
@@ -41,14 +37,10 @@
             </div>
         </div>
         <div class="BorrowedBooksCardsContainer">
-            <h1 class="BB_Cards_Title" >Borrowed Books</h1>
-            {% if borrowed_books_DJ_array %}
-                <div class="BB_Card_List"></div>
-            {% else %}
-                <div class="BB_NoBooksMessage" style="text-align:center; margin-top:20px; font-size:18px;">
-                    No borrowed books found.
-                </div>
-            {% endif %}
+            <h1 class="BB_Cards_Title">Borrowed Books</h1>
+            <div class="BB_Card_List">
+                <!-- Borrowed Cards Goes Here -->
+            </div>
             <div class="ButtonRow">
                 <div class="pagination-numbers"></div>
             </div>

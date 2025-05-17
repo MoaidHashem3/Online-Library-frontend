@@ -1,6 +1,3 @@
-window.onload = LoadUserBorrowedBooks;
-
-
 const CardsList = document.getElementsByClassName("BB_Card_List").item(0);
 
 const MAX_CARDS_TO_DISPLAY = 4;
@@ -41,10 +38,36 @@ function updatePaginationButtons() {
     paginationContainer.innerHTML = paginationHTML;
 }
 
+function GenerateDummyData(count) {
+    const dummyData = [];
+    for (let i = 1; i <= count; i++) {
+        dummyData.push({
+            id: i.toString(),
+            name: `Book Title ${i}`,
+            author: `Author ${i}`,
+            category: `Category ${i % 5}`,
+            image: "../assets/img/testImage.jpeg"
+        });
+    }
+    return dummyData;
+}
+
 async function LoadUserBorrowedBooks(){
     try {
+        // example GET request code commented out, replace with your actual API call
+        /*
+        let userId = window.localStorage.getItem("UserId");
+        let request = new Request(`url/${userId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        let response = await fetch(request);
+        let data = await response.json();
+        */
 
-        let data = BORROWED_BOOKS_DATA;
+        let data = GenerateDummyData(18);
         
         NumberOfPossiblePages = Math.ceil(data.length / MAX_CARDS_TO_DISPLAY);
         ArrayOfCards = new Array(NumberOfPossiblePages);
@@ -80,8 +103,9 @@ function CreateCard(bookDetails){
     let card = document.createElement("div");
     card.className = "BB_Card";
     card.onclick = () => {
-        const queryString = `?id=${encodeURIComponent(bookDetails.id)}`;
-        window.location.href = localStorage.getItem("userRole") === "admin" ? `/view-book-details-admin/${queryString}` : `/view-book-details-user/${queryString}`;
+        // EDIT THIS LATER: link to book details page
+        // const queryString = `?id=${encodeURIComponent(bookDetails.id)}&name=${encodeURIComponent(bookDetails.name)}&author=${encodeURIComponent(bookDetails.author)}&category=${encodeURIComponent(bookDetails.category)}&image=${encodeURIComponent(bookDetails.image)}`;
+        // window.location.href = `ViewBookDetailsUser.html${queryString}`;
     }
     
     let cardDetails = document.createElement("div");
@@ -119,7 +143,7 @@ function CreateCard(bookDetails){
                 await unborrowBook(bookDetails.id);
                 card.remove();
                 alert("Book returned successfully!");
-                window.location.reload();
+                await LoadUserBorrowedBooks();
             } catch (error) {
                 alert("Failed to return book. Please try again.");
             }
@@ -135,7 +159,6 @@ function CreateCard(bookDetails){
     card.appendChild(cardDetails);
     card.appendChild(bookImage);
     
-    
     return card;
 }
 
@@ -143,12 +166,11 @@ async function unborrowBook(bookId) {
     const API_URL = ''; 
     const userId = localStorage.getItem('userId');
     
-    const response = await fetch(`${API_URL}/books/${bookId}/unborrow`, { 
-        //example enpoint for now will edit later in phase 3
+    const response = await fetch(`/books/${bookId}/unborrow/`, {  
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('userToken')}`
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify({ userId })
     });

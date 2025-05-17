@@ -37,17 +37,17 @@
             <div class="details-section">
                 <div class="body-content">
                     <img src="{% static 'assets/img/icons/BookID.png' %}" alt="Book ID" class="body-images">
-                    <p class="body-text" id="BookId">{{ book.id }}</p>
+                    <p class="body-text" id="BookId">Book ID</p>
                 </div>
 
                 <div class="body-content">
                     <img src="{% static 'assets/img/icons/Author.png' %}" alt="Author" class="body-images">
-                    <p class="body-text" id="BookAuthor">{{ book.author }}</p>
+                    <p class="body-text" id="BookAuthor">Author</p>
                 </div>
 
                 <div class="body-content">
                     <img src="{% static 'assets/img/icons/Category.png' %}" alt="Category" class="body-images">
-                    <p class="body-text" id="BookCategory">{{ book.category }}</p>
+                    <p class="body-text" id="BookCategory">Category</p>
                 </div>
 
                 <div class="buttonDirection">
@@ -61,17 +61,17 @@
             <div class="image-section">
                 <div class="right-details">
                     <div class="right-image">
-                        <img src="{{ book.imageUrl }}" alt="Book" style="border-radius: 10%;">
+                        <img src="{% static 'assets/img/testImage.jpeg' %}" alt="Book" style="border-radius: 10%;">
                     </div>
-                    <p class="text" id="BookTitle">{{ book.title }}</p>
-                    <p class="book-description" id="BookDescription">{{ book.description }}</p>
+                    <p class="text" id="BookTitle">Book Name</p>
+                    <p class="book-description" id="BookDescription">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                 </div>
             </div>
         </div>
     </main>
     {% include 'Includes/footer.html' %}
     <script src="{% static 'js/main.js' %}"></script>
-    <script src="{% static 'js/bookDetails.js' %}"></script>
+    <script src="{% static 'js/Utilities/FillBookDetails.js' %}"></script>
     <script src="{% static 'js/BookDetailsUser.js' %}"></script>
 </body>
 </html>

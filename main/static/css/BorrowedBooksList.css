@@ -68,6 +68,7 @@ body{
 .BB_Card_BookImage{
     position: absolute;
     border-radius: 0.3rem 1rem 1rem 0.3rem;
+    width: auto;
     height: 100%;
     object-fit: cover;
     top: 0;

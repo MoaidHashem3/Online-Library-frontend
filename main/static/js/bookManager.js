@@ -85,7 +85,6 @@ let currentPage = 1;
 const booksPerPage = 8;
 let totalBooks = 0;
 
-
 async function fetchBooks() {
     try {
         //  actual API call for fetching books (Phase 3)
@@ -134,7 +133,7 @@ function displayBooks(books) {
 function navigateToBookDetails(bookId) {
     const userRole = getLoggedInUserRole();
     //EDIT THIS LATER
-     const page = userRole === 'admin' ? '/view-book-details-admin/' : '/view-book-details-user/'; // prefix the path with / to correctly move to that page
+     const page = userRole === 'admin' ? 'view-book-details-admin/' : 'view-book-details-user/';
      window.location.href = `${page}?id=${bookId}`;
 }
 

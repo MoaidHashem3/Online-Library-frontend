@@ -10,44 +10,38 @@ const bookDescription = document.getElementById("BookDescription");
 
 
 
-
-async function LoadBookData(){
+function LoadBookData(){
     const params = new URLSearchParams(window.location.search);
     const bookId_fromParam = params.get("id"); // should make a api call that fetches book old data
 
-     const BookDetails = await GetBookDetails(bookId_fromParam);
+    // const BookDetails = await GetBookDetails(id);
+    
+    let BookDetails = {
+        "id" : "BookId",
+        "title" : "BookTitle",
+        "author" : "BookAuthor",
+        "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "category" : "Book Category"
+    }
 
-     if (BookDetails){
-         bookId.textContent = BookDetails.id;
-         bookTitle.textContent = BookDetails.title;
-         bookAuthor.textContent = BookDetails.author;
-         bookDescription.textContent = BookDetails.description;
-         bookCategory.textContent = BookDetails.category;
-     }else {
-         console.error("Book doesn't found");
-     }
-
+    bookId.textContent = BookDetails.id;
+    bookTitle.textContent = BookDetails.title;
+    bookCategory.textContent = BookDetails.author;
+    bookDescription.textContent = BookDetails.description;
+    bookCategory.textContent = BookDetails.category;
 }
 
 
 
 async function GetBookDetails(id){
-    let request = new Request('/view-book-details-user/',{
-        method : 'POST',
+    let request = new Request(`url/${id}`,{
+        method : 'Get',
         headers:{
             'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({bookId: id})
+        }
     });
 
-     try {
-        const response = await fetch(request);
-        if (!response.ok) {
-            throw new Error("Book not found");
-        }
-        return await response.json();
-    } catch (error) {
-        console.error("Error fetching book details:", error);
-        return null;
-    }
+    let response = await fetch(request);
+
+    return await response.json();
 }

@@ -15,11 +15,10 @@ async function checkBookStatus() {
     }
 
     try {
-        const response = await fetch(`${API_URL}/books/${currBookId}/status`, {
-            //example endpoint for now will edit later in phase 3
-            headers: {
-                'Authorization': `Bearer ${userToken}`
-            }
+        const response = await fetch(`/books/${currBookId}/status/`, {  
+             headers: {
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+        },
         });
         const data = await response.json();
         
@@ -40,33 +39,53 @@ async function checkBookStatus() {
 BorrowBtn.onclick = async () => {
     try {
         const response = await MakeBorrowCall();
+        console.log('Borrow response:', response);
+
         if (response.success) {
             alert('Book borrowed successfully!');
             await checkBookStatus();
         } else {
-            alert('Failed to borrow book. Please try again.');
+            alert('Failed to borrow book: ' + (response.error || JSON.stringify(response)));
         }
     } catch (error) {
         alert('Error borrowing book');
-        console.error(error);
+        console.error('Borrow error:', error);
     }
 };
 
 async function MakeBorrowCall() {
-    const request = new Request(`${API_URL}/books/${currBookId}/borrow`, {
-        //example enpoint for now will edit later in phase 3
+ 
+
+    const request = new Request(`/books/${currBookId}`, {  
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('userToken')}`
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify({
             userId: currentUser
         })
     });
-    
-    const response = await fetch(request);
-    return await response.json();
+
+    try {
+        const response = await fetch(request);
+
+
+        try {
+            return await response.json();
+        } catch (jsonErr) {
+            const text = await response.text();
+            console.error('Failed to parse JSON:', text);
+            return { success: false, error: 'Invalid JSON response from server' };
+        }
+    } catch (fetchErr) {
+        console.error('Fetch error:', fetchErr);
+        throw fetchErr;
+    }
 }
 
+
+
+
 document.addEventListener('DOMContentLoaded', checkBookStatus);
+//window.onload = LoadUserBorrowedBooks;

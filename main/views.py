@@ -1,14 +1,16 @@
 import json
-
 from django.shortcuts import render, redirect
-from django.contrib.auth import login as auth_login, logout
-from django.contrib.auth.decorators import login_required
-from .models import BorrowedBook
-from backend import settings
+from django.contrib.auth import login as auth_login, authenticate, logout
+from django.templatetags.static import static
+
+from django.views.decorators.csrf import csrf_exempt
 from .forms import UserRegistrationForm, LoginForm, AddBookForm, EditBookForm
 from django.http import JsonResponse
 from django.views.decorators.csrf import ensure_csrf_cookie
+from django.contrib.auth.decorators import user_passes_test
 from .models import User, Book
+from django.views.decorators.http import require_POST
+from .models import Book, BorrowedBook 
 
 
 def index(request):
@@ -77,32 +79,8 @@ def view_books(request):
     return render(request, 'main/ViewBooks.html')
 
 
-@login_required
 def borrowed_books_list(request):
-    borrowed_books = BorrowedBook.objects.filter(user=request.user).select_related('book')
-
-    borrowed_books_Data = []
-
-    for borrowed_book in borrowed_books:
-        if borrowed_book.book.image:
-            book_imageUrl = request.build_absolute_uri(borrowed_book.book.image.url)
-        else:
-            default_image_path = settings.STATIC_URL + 'assets/img/DefaultImage.jpeg'
-            book_imageUrl = request.build_absolute_uri(default_image_path)
-        borrowed_books_Data.append(
-            {
-                'id': borrowed_book.book.id,
-                'name': borrowed_book.book.title,
-                'author': borrowed_book.book.author,
-                'category': borrowed_book.book.category,
-                'image': book_imageUrl
-            }
-        )
-
-    return render(request, 'main/BorrowedBooksList.html', {
-        'borrowed_books': json.dumps(borrowed_books_Data),
-        'borrowed_books_DJ_array' : borrowed_books_Data
-    })
+    return render(request, 'main/BorrowedBooksList.html')
 
 
 def add_new_book(request):
@@ -128,6 +106,7 @@ def add_new_book(request):
 
 
 def deleteBook(request, book_id):
+    print(book_id)
     if not request.user.is_authenticated:
         return redirect('login')
     if not CheckUserIsAdmin(request.user):
@@ -146,66 +125,27 @@ def deleteBook(request, book_id):
 
 
 def view_book_details_user(request):
-    if request.method == "GET":
-        book_id = request.GET.get('id')
-        if not book_id:
-            return redirect('view_books')
-        try:
-            book = Book.objects.get(id=book_id)
-            if book.image:
-                book_imageUrl = request.build_absolute_uri(book.image.url)
-            else:
-                default_image_path = settings.STATIC_URL + 'assets/img/DefaultImage.jpeg'
-                book_imageUrl = request.build_absolute_uri(default_image_path)
+    if request.method == "POST":
+        data = json.loads(request.body)
+        bookId = data.get('bookId')
 
-            bookData = {
+        try:
+            book = Book.objects.get(pk=bookId)
+            return JsonResponse({
                 'id': book.id,
                 'title': book.title,
                 'author': book.author,
                 'category': book.category,
-                'imageUrl': book_imageUrl,
+                'imageUrl': str(book.image),
                 'description': book.description,
-            }
-
-            context = {'book': bookData}
-            return render(request, 'main/ViewBookDetailsUser.html', context)
+            }, status=200)
         except Exception as e:
-            return redirect('view_books')
+            return JsonResponse({'error':'book not found'}, status=404)
     return render(request, 'main/ViewBookDetailsUser.html')
 
 
 def view_book_details_admin(request):
-    if not request.user.is_authenticated:
-        return redirect('login')
-    if not CheckUserIsAdmin(request.user):
-        return redirect('view_books')
-    if request.method == "GET":
-        book_id = request.GET.get('id')
-        if not book_id:
-            return redirect('view_books')
-        try:
-            book = Book.objects.get(id=book_id)
-            if book.image:
-                book_imageUrl = request.build_absolute_uri(book.image.url)
-            else:
-                default_image_path = settings.STATIC_URL + 'assets/img/DefaultImage.jpeg'
-                book_imageUrl = request.build_absolute_uri(default_image_path)
-
-            bookData = {
-                'id': book.id,
-                'title': book.title,
-                'author': book.author,
-                'category': book.category,
-                'imageUrl': book_imageUrl,
-                'description': book.description,
-            }
-
-            context = {'book': bookData}
-            return render(request, 'main/ViewBookDetailsAdmin.html', context)
-        except Exception as e:
-            return redirect('view_books')
     return render(request, 'main/ViewBookDetailsAdmin.html')
-
 
 def edit_book(request):
     if not request.user.is_authenticated:
@@ -245,7 +185,51 @@ def edit_book(request):
     image_url = book.image.url if book.image else '/static/img/testImage.jpeg'
     context = {'form': form, 'image_url': image_url}
     return render(request, 'main/EditBook.html', context)
+from django.views.decorators.http import require_POST
+from django.http import JsonResponse
 
+@require_POST
+@csrf_exempt
+def borrow_book(request, book_id):
+    if not request.user.is_authenticated:
+        return JsonResponse({'success': False, 'error': 'Login required'}, status=401)
+
+    try:
+        book = Book.objects.get(pk=book_id)
+
+        if not book.is_available:
+            return JsonResponse({'success': False, 'error': 'Book is already borrowed'}, status=400)
+
+        BorrowedBook.objects.create(user=request.user, book=book)
+        book.is_available = False
+        book.save()
+
+        return JsonResponse({'success': True})
+    except Book.DoesNotExist:
+        return JsonResponse({'success': False, 'error': 'Book not found'}, status=404)
+    except Exception as e:
+        return JsonResponse({'success': False, 'error': str(e)}, status=500)
+
+
+@require_POST
+def return_book(request, book_id):
+    if not request.user.is_authenticated:
+        return JsonResponse({'success': False, 'error': 'Login required'}, status=401)
+
+    try:
+        borrowed = BorrowedBook.objects.get(book_id=book_id, user=request.user)
+
+        book = borrowed.book
+        book.is_available = True
+        book.save()
+
+        borrowed.delete()
+
+        return JsonResponse({'success': True})
+    except BorrowedBook.DoesNotExist:
+        return JsonResponse({'success': False, 'error': 'You haven’t borrowed this book'}, status=404)
+    except Exception as e:
+        return JsonResponse({'success': False, 'error': str(e)}, status=500)
 
 def CheckUserIsAdmin(user):
     return User.objects.get(pk=user.pk).is_admin
