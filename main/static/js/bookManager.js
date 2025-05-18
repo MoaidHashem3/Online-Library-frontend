@@ -1,5 +1,5 @@
 let currentPage = 1;
-const booksPerPage = 8;
+const booksPerPage = 10;
 let totalBooks = 0;
 let allBooks = [];
 
@@ -47,7 +47,7 @@ function displayBooks(books) {
 
     let html = '<div class="row">';
     booksToShow.forEach((book, index) => {
-        if (index > 0 && index % 4 === 0) {
+        if (index > 0 && index % 5 === 0) { 
             html += '</div><div class="row">';
         }
         const truncatedDescription = book.description?.length > 100 

@@ -263,9 +263,9 @@ body {
 
 .notification-wrapper {
     position: fixed;
-    top: 10px !important;  /* Override any inline styles */
-    left: 50% !important;  /* Center horizontally */
-    transform: translateX(-50%) !important;  /* Center horizontally */
+    top: 10px !important;  
+    left: 50% !important;  
+    transform: translateX(-50%) !important;  
     z-index: 9999;
 }
 

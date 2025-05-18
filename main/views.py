@@ -136,7 +136,7 @@ def deleteBook(request, book_id):
         return JsonResponse({'success': False, 'error': 'Not authorized'}, status=403)
     if request.method == "DELETE":
         try:
-            book = Book.objects.get(id=book_id)  # Fix: Changed from book_id to id
+            book = Book.objects.get(id=book_id) 
             book.delete()
             return JsonResponse({'success': True})
         except Book.DoesNotExist:

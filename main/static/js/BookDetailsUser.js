@@ -51,9 +51,9 @@ BorrowBtn.onclick = async () => {
             const notificationWrapper = document.createElement('div');
             notificationWrapper.className = 'notification-wrapper';
             notificationWrapper.style.position = 'fixed';
-            notificationWrapper.style.top = '10px'; // Changed from 80px to 10px
-            notificationWrapper.style.left = '50%'; // Center horizontally
-            notificationWrapper.style.transform = 'translateX(-50%)'; // Center horizontally
+            notificationWrapper.style.top = '10px';
+            notificationWrapper.style.left = '50%'; 
+            notificationWrapper.style.transform = 'translateX(-50%)';
             notificationWrapper.style.zIndex = '9999';
             
             const successMsg = document.createElement('div');

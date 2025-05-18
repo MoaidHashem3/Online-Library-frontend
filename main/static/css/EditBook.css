@@ -8,10 +8,16 @@ body {
     min-height: 100vh;
     padding-top: 70px;
 }
-
+.formContainer {
+    display: flex;
+    padding: 2rem;
+    gap: 2rem;
+    background-color: #1A1F25;
+}
 .container {
     display: flex;
     padding: 2rem;
+    padding-left: 0;
     gap: 2rem;
     background-color: #1A1F25;
 }

@@ -153,7 +153,7 @@ body{
 
 .success-message {
     position: fixed;
-    top: 80px; /* Moved down to avoid navbar */
+    top: 80px; 
     right: 20px;
     background-color: #00CF76;
     color: white;

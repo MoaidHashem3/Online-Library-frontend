@@ -4,7 +4,10 @@ form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const errorElements = document.querySelectorAll('.error-message');
-    errorElements.forEach(element => element.textContent = '');
+    errorElements.forEach(element => {
+        element.textContent = '';
+        element.style.color = '#FF4444';  
+    });
 
     const password = document.querySelector('[name="password"]').value;
     const confirmPassword = document.getElementById('confirm-password').value;
@@ -49,7 +52,26 @@ form.addEventListener('submit', async (e) => {
         const data = await response.json();
 
         if (response.ok) {
-            document.getElementById('successMessage').textContent = 'Registration successful! Redirecting...';
+            const notificationWrapper = document.createElement('div');
+            notificationWrapper.className = 'notification-wrapper';
+            notificationWrapper.style.position = 'fixed';
+            notificationWrapper.style.top = '10px';
+            notificationWrapper.style.left = '50%';
+            notificationWrapper.style.transform = 'translateX(-50%)';
+            notificationWrapper.style.zIndex = '9999';
+            
+            const successMsg = document.createElement('div');
+            successMsg.className = 'success-message';
+            successMsg.textContent = 'Registration successful! Redirecting...';
+            successMsg.style.backgroundColor = '#00CF76';  
+            successMsg.style.color = 'white';
+            successMsg.style.padding = '1rem 2rem';
+            successMsg.style.borderRadius = '8px';
+            successMsg.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
+            
+            notificationWrapper.appendChild(successMsg);
+            document.body.appendChild(notificationWrapper);
+
             setTimeout(() => {
                 window.location.href = '/login';
             }, 2000);
@@ -58,12 +80,15 @@ form.addEventListener('submit', async (e) => {
                 const errorElement = document.getElementById(`${field}Error`);
                 if (errorElement) {
                     errorElement.textContent = errors[0];
+                    errorElement.style.color = '#FF4444';
                 }
             }
         }
     } catch (error) {
         console.error('Error:', error);
-        document.getElementById('successMessage').textContent = 'An error occurred. Please try again.';
+        const errorMsg = document.getElementById('successMessage');
+        errorMsg.textContent = 'An error occurred. Please try again.';
+        errorMsg.style.color = '#FF4444';  
     }
 });
 
